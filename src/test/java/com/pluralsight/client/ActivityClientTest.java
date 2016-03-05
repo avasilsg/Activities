@@ -29,4 +29,9 @@ public class ActivityClientTest {
 		assertNotNull(list);
 	}
 
+	@Test(expected = RuntimeException.class)
+	public void getBadReuqest() {
+		
+		client.get("000");
+	}
 }

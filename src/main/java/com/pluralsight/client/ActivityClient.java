@@ -6,6 +6,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 import com.pluralsight.model.Activity;
 
@@ -21,9 +22,11 @@ public class ActivityClient {
 
 	public Activity get(String id) {
 		
-		Activity activity = target.path("/activities/" + id).request().get(Activity.class);
-
-		return activity;
+		Response resp = target.path("/activities/" + id).request().get();
+		if (resp.getStatus() != 200) {
+			throw new RuntimeException();
+		}
+		return resp.readEntity(Activity.class);
 	}
 	
 	public List<Activity> getList() {

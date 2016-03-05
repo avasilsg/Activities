@@ -44,7 +44,8 @@ public class ActivityRepositoryStub implements ActivityRepository {
 		user.setName("Stephan");
 		
 		act1.setUser(user);
-		
-		return act1;
+		if (activity.equals(act1.getId()))
+			return act1;
+		return null;
 	}
 }
