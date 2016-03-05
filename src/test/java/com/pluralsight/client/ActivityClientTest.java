@@ -7,10 +7,29 @@ import java.util.List;
 import org.junit.Test;
 
 import com.pluralsight.model.Activity;
+import com.pluralsight.model.User;
 
 public class ActivityClientTest {
 
 	private static ActivityClient client = new ActivityClient();
+	
+	@Test
+	public void testPostMethod() {
+		Activity activity = new Activity();
+		activity.setDescription("Gym");
+		activity.setDuration(60);
+		
+		User user = new User();
+		user.setId("222");
+		user.setName("Stephan");
+		
+		activity.setUser(user);
+		
+		activity = client.createActivity(activity);
+		
+		assertNotNull(activity);
+		
+	}
 	
 	@Test
 	public void testGet() {		
