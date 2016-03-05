@@ -10,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.pluralsight.model.Activity;
 import com.pluralsight.model.User;
@@ -49,8 +51,18 @@ public class ActivityReseource {
 	@GET
 	@Produces({MediaType.APPLICATION_ATOM_XML, MediaType.APPLICATION_JSON })
 	@Path("{activityId}")
-	public Activity getActivity(@PathParam ("activityId") String activity) {
-		return this.activityRepository.findActivity(activity);
+	public Response getActivity(@PathParam ("activityId") String id) {
+		if (null == id) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		Activity activity =  this.activityRepository.findActivity(id);
+		
+		if (null == activity) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		return Response.ok().entity(activity).build();
 	}
 	
 	@GET
