@@ -13,6 +13,18 @@ public class ActivityClientTest {
 
 	private static ActivityClient client = new ActivityClient();
 	
+	
+	@Test
+	public void testPutMethod() {
+		Activity activity = new Activity();
+		activity.setDescription("Yoga");
+		activity.setDuration(60);
+		activity.setId("224");
+		
+		activity = client.update(activity);
+		
+	}
+	
 	@Test
 	public void testPostMethod() {
 		Activity activity = new Activity();

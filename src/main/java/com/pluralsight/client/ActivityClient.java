@@ -46,4 +46,9 @@ public class ActivityClient {
 		}
 		return resp.readEntity(Activity.class);
 	}
+
+	public Activity update(Activity activity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
